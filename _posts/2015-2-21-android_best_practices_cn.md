@@ -211,6 +211,7 @@ jar文件，那么它们可能成为永久的版本，如`2.1.1`.下载jar包更
 	```
 
 ### IDEs and text editors
+
 ### IDE集成开发环境和文本编辑器
 
 **Use whatever editor, but it must play nicely with the project structure.** Editors are a personal choice, and it's your responsibility to get your editor functioning according to the project structure and build system.
