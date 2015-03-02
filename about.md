@@ -20,6 +20,8 @@ Android开发者，爱生活，爱技术， 爱开源，爱赚钱。
 
 * 知乎: [andyiac](http://www.zhihu.com/people/andyiac)
 
+* 微信：andyiac
+
 ## 关于本站
 
 * ©andyiac 2012 with help from [jekyllbootstrap](http://jekyllbootstrap.com) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/)
