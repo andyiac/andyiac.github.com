@@ -126,6 +126,7 @@ The `settings.gradle` then keeps references to these library projects, which `ap
 
 
 ### Gradle configuration
+
 ### Gradle 配置
 
 **General structure.** Follow [Google's guide on Gradle for Android](http://tools.android.com/tech-docs/new-build-system/user-guide)
