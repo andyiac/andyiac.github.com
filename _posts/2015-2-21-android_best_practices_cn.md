@@ -650,6 +650,8 @@ Normally for a aesthetic UI, it is important to reduce the variety of colors bei
 
 	</resources>
 	```
+	
+	
 -------------------------------------------------------------------
 You should use the `spacing_****` dimensions for layouting, in margins and paddings, instead of hard-coded values, much like strings are normally treated. This will give a consistent look-and-feel, while making it easier to organize and change styles and layouts.
 
