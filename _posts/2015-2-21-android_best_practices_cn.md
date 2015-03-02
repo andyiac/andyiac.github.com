@@ -43,6 +43,7 @@ Also avoid putting the SDK in another system-level directory that might need sud
 此外，若果你的IDE是在普通用户，不是在root下运行，还要避免吧SDK放到一下需要sudo权限的系统级别目录下。
 
 ### Build system
+
 ### 构建系统
 
 Your default option should be [Gradle](http://tools.android.com/tech-docs/new-build-system). Ant is much more limited and also more verbose. With Gradle, it's simple to:
@@ -65,6 +66,7 @@ Android's Gradle plugin is also being actively developed by Google as the new st
 同时，Android Gradle插件作为新标准的构建系统正在被Google积极的开发。
 
 ### Project structure
+
 ### 工程结构
 
 There are two popular options: the old Ant & Eclipse ADT project structure, and the new Gradle & Android Studio project structure. You should choose the new project structure. If your project uses the old structure, consider it legacy and start porting it to the new structure.
