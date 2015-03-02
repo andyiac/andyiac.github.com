@@ -615,6 +615,8 @@ Normally for a aesthetic UI, it is important to reduce the variety of colors bei
 像这样规范的颜色很容易修改或重构，会使应用一共使用了多少种不同的颜色变得非常清晰。
 
 通常*****对于一个Aesthetic UI来说减少使用颜色的种类是非常重要的。
+
+
 ------------------------------------------------------------
 
 
