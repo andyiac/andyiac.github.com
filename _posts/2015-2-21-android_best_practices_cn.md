@@ -236,6 +236,7 @@ Whatever you use, just make sure Gradle and the new project structure remain as 
 特别如果你改变Ant的配置，不要忘记保持`build.gradle`是最新和起作用的。同时，善待其他开发者，不要强制改变他们的开发工具和偏好。
 
 ### Libraries
+
 ### 类库
 
 **[Jackson](http://wiki.fasterxml.com/JacksonHome)** is a Java library for converting Objects into JSON and vice-versa. [Gson](https://code.google.com/p/google-gson/) is a popular choice for solving this problem, however we find Jackson to be more performant since it supports alternative ways of processing JSON: streaming, in-memory tree model, and traditional JSON-POJO data binding. Keep in mind, though, that Jackson is a larger library than GSON, so depending on your case, you might prefer GSON to avoid 65k methods limitation. Other alternatives: [Json-smart](https://code.google.com/p/json-smart/) and [Boon JSON](https://github.com/RichardHightower/boon/wiki/Boon-JSON-in-five-minutes)
@@ -391,6 +392,7 @@ On an architectural level, your app should have a top-level activity that contai
 
 
 ### Java packages architecture
+
 ### Java 包结构
 
 Java architectures for Android applications can be roughly approximated in [Model-View-Controller](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller).
@@ -456,6 +458,7 @@ All in all, ordered from the closest-to-backend to the closest-to-the-user:
 	```
 
 ### Resources
+
 ### 资源文件
 
 **Naming.** Follow the convention of prefixing the type, as in `type_foo_bar.xml`. Examples: `fragment_contact_details.xml`, `view_primary_button.xml`, `activity_main.xml`.
