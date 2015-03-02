@@ -6,6 +6,8 @@ tags : [翻译,android]
 # Android 开发最佳实践
 
  **翻译初稿，近期还会修改敬请期待** 有问题请微信联系：andyiac
+ 
+
 从[Futurice](http://www.futurice.com)公司Android开发者中学到的经验。
 遵循以下准则，避免重复发明轮子。若您对开发iOS或Windows Phone 有兴趣，
 请看[**iOS Good Practices**](https://github.com/futurice/ios-good-practices) 和 [**Windows client Good Practices**](https://github.com/futurice/win-client-dev-good-practices) 这两篇文章。
@@ -74,42 +76,42 @@ Old structure:
 
 老的结构
 
-```
-old-structure
-├─ assets
-├─ libs
-├─ res
-├─ src
-│  └─ com/futurice/project
-├─ AndroidManifest.xml
-├─ build.gradle
-├─ project.properties
-└─ proguard-rules.pro
-```
+	```
+	old-structure
+	├─ assets
+	├─ libs
+	├─ res
+	├─ src
+	│  └─ com/futurice/project
+	├─ AndroidManifest.xml
+	├─ build.gradle
+	├─ project.properties
+	└─ proguard-rules.pro
+	```
 
 New structure:
 新的结构
 
-```
-new-structure
-├─ library-foobar
-├─ app
-│  ├─ libs
-│  ├─ src
-│  │  ├─ androidTest
-│  │  │  └─ java
-│  │  │     └─ com/futurice/project
-│  │  └─ main
-│  │     ├─ java
-│  │     │  └─ com/futurice/project
-│  │     ├─ res
-│  │     └─ AndroidManifest.xml
-│  ├─ build.gradle
-│  └─ proguard-rules.pro
-├─ build.gradle
-└─ settings.gradle
-```
-
+	```
+	new-structure
+	├─ library-foobar
+	├─ app
+	│  ├─ libs
+	│  ├─ src
+	│  │  ├─ androidTest
+	│  │  │  └─ java
+	│  │  │     └─ com/futurice/project
+	│  │  └─ main
+	│  │     ├─ java
+	│  │     │  └─ com/futurice/project
+	│  │     ├─ res
+	│  │     └─ AndroidManifest.xml
+	│  ├─ build.gradle
+	│  └─ proguard-rules.pro
+	├─ build.gradle
+	└─ settings.gradle
+	```
+	
 The main difference is that the new structure explicitly separates 'source sets' (`main`, `androidTest`), a concept from Gradle. You could, for instance, add source sets 'paid' and 'free' into `src` which will have source code for the paid and free flavours of your app.
 
 主要的区别在于，新的结构明确的分开了'source sets' (`main`,`androidTest`)，Gradle的一个理念。
@@ -123,7 +125,6 @@ The `settings.gradle` then keeps references to these library projects, which `ap
 然后`settings.gradle`不断引用这些库项目，其中`app/build.gradle`可以引用。
 
 
--------------------------
 ### Gradle configuration
 ### Gradle 配置
 
@@ -147,17 +148,17 @@ _Don't do this_. This would appear in the version control system.
 
 _不要做这个_ . 这会出现在版本控制中。
 
-```groovy
-signingConfigs {
-    release {
-        storeFile file("myapp.keystore")
-        storePassword "password123"
-        keyAlias "thekey"
-        keyPassword "password789"
-    }
-}
-```
-
+	```groovy
+	signingConfigs {
+		release {
+			storeFile file("myapp.keystore")
+			storePassword "password123"
+			keyAlias "thekey"
+			keyPassword "password789"
+		}
+	}
+	```
+	
 Instead, make a `gradle.properties` file which should _not_ be added to the version control system:
 
 而是，建立一个不加入版本控制系统的`gradle.properties`文件。
@@ -171,22 +172,22 @@ That file is automatically imported by gradle, so you can use it in `build.gradl
 
 那个文件是gradle自动引入的，你可以在`buld.gradle`文件中使用，例如：
 
-```groovy
-signingConfigs {
-    release {
-        try {
-            storeFile file("myapp.keystore")
-            storePassword KEYSTORE_PASSWORD
-            keyAlias "thekey"
-            keyPassword KEY_PASSWORD
-        }
-        catch (ex) {
-            throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
-        }
-    }
-}
-```
-
+	```groovy
+	signingConfigs {
+		release {
+			try {
+				storeFile file("myapp.keystore")
+				storePassword KEYSTORE_PASSWORD
+				keyAlias "thekey"
+				keyPassword KEY_PASSWORD
+			}
+			catch (ex) {
+				throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+			}
+		}
+	}
+	```
+	
 **Prefer Maven dependency resolution instead of importing jar files.** If you explicitly include jar files in your project, they will be of some specific frozen version, such as `2.1.1`. Downloading jars and handling updates is cumbersome, this is a problem that Maven solves properly, and is also encouraged in Android Gradle builds. You can specify a range of versions, such as `2.1.+` and Maven will handle the automatic update to the most recent version matching that pattern. Example:
 
 **使用 Maven 依赖方案代替使用导入jar包方案** 如果在你的项目中你明确使用率
@@ -194,17 +195,17 @@ jar文件，那么它们可能成为永久的版本，如`2.1.1`.下载jar包更
 这个问题Maven很好的解决了，这在Android Gradle构建中也是推荐的方法。你可
 以指定版本的一个范围，如`2.1.+`,然后Maven会自动升级到制定的最新版本，例如：
 
-```groovy
-dependencies {
-    compile 'com.netflix.rxjava:rxjava-core:0.19.+'
-    compile 'com.netflix.rxjava:rxjava-android:0.19.+'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.+'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.4.+'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.+'
-    compile 'com.squareup.okhttp:okhttp:2.0.+'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.+'
-}
-```
+	```groovy
+	dependencies {
+		compile 'com.netflix.rxjava:rxjava-core:0.19.+'
+		compile 'com.netflix.rxjava:rxjava-android:0.19.+'
+		compile 'com.fasterxml.jackson.core:jackson-databind:2.4.+'
+		compile 'com.fasterxml.jackson.core:jackson-core:2.4.+'
+		compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.+'
+		compile 'com.squareup.okhttp:okhttp:2.0.+'
+		compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.+'
+	}
+	```
 
 ### IDEs and text editors
 ### IDE集成开发环境和文本编辑器
@@ -299,30 +300,30 @@ Do your best to help them understand your code and also Rx.
 使用它时先安装JDK8，在Android Studio工程结构对话框中把它设置成为SDK路径，同时设置`JAVA8_HOME`和`JAVA7_HOME`环境变量，
 然后在工程根目录下配置 build.gradle：
 
-```groovy
-dependencies {
-    classpath 'me.tatarka:gradle-retrolambda:2.4.+'
-}
-```
+	```groovy
+	dependencies {
+		classpath 'me.tatarka:gradle-retrolambda:2.4.+'
+	}
+	```
 
 and in each module's build.gradle, add
 同时在每个module 的build.gradle中添加
 
-```groovy
-apply plugin: 'retrolambda'
+	```groovy
+	apply plugin: 'retrolambda'
 
-android {
-    compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-}
+	android {
+		compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
 
-retrolambda {
-    jdk System.getenv("JAVA8_HOME")
-    oldJdk System.getenv("JAVA7_HOME")
-    javaVersion JavaVersion.VERSION_1_7
-}
-```
+	retrolambda {
+		jdk System.getenv("JAVA8_HOME")
+		oldJdk System.getenv("JAVA7_HOME")
+		javaVersion JavaVersion.VERSION_1_7
+	}
+	```
 
 Android Studio offers code assist support for Java8 lambdas. If you are new to lambdas, just use the following to get started:
 
@@ -436,19 +437,19 @@ All in all, ordered from the closest-to-backend to the closest-to-the-user:
 
 总而言之，以最接近用户而不是最接近后端去安排他们。
 
-```
-com.futurice.project
-├─ network
-├─ models
-├─ managers
-├─ utils
-├─ fragments
-└─ views
-   ├─ adapters
-   ├─ actionbar
-   ├─ widgets
-   └─ notifications
-```
+	```
+	com.futurice.project
+	├─ network
+	├─ models
+	├─ managers
+	├─ utils
+	├─ fragments
+	└─ views
+	   ├─ adapters
+	   ├─ actionbar
+	   ├─ widgets
+	   └─ notifications
+	```
 
 ### Resources
 ### 资源文件
@@ -475,29 +476,29 @@ com.futurice.project
 - 考虑使用[Designtime attributes 设计时布局属性](http://tools.android.com/tips/layout-designtime-attributes)，Android Studio已经提供支持，而不是硬编码`android:text`
 (墙内也可以参考stormzhang的这篇博客[链接](http://stormzhang.com/devtools/2015/01/11/android-studio-tips1/))。
 
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+	```xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		>
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="@string/name"
-        style="@style/FancyText"
-        />
+		<TextView
+			android:id="@+id/name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:text="@string/name"
+			style="@style/FancyText"
+			/>
 
-    <include layout="@layout/reusable_part" />
+		<include layout="@layout/reusable_part" />
 
-</LinearLayout>
-```
+	</LinearLayout>
+	```
 
 As a rule of thumb, attributes `android:layout_****` should be defined in the layout XML, while other attributes `android:****` should stay in a style XML. This rule has exceptions, but in general works fine. The idea is to keep only layout (positioning, margin, sizing) and content attributes in the layout files, while keeping all appearance details (colors, padding, font) in styles files.
 
@@ -523,25 +524,25 @@ The exceptions are:
 **使用styles** 几乎每个项目都需要适当的使用style文件，因为对于一个视图来说有一个重复的外观是很常见的。
 在应用中对于大多数文本内容，最起码你应该有一个通用的style文件，例如：
 
-```xml
-<style name="ContentText">
-    <item name="android:textSize">@dimen/font_normal</item>
-    <item name="android:textColor">@color/basic_black</item>
-</style>
-```
+	```xml
+	<style name="ContentText">
+		<item name="android:textSize">@dimen/font_normal</item>
+		<item name="android:textColor">@color/basic_black</item>
+	</style>
+	```
 
 Applied to TextViews:
 
 应用到TextView 中:
 
-```xml
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/price"
-    style="@style/ContentText"
-    />
-```
+	```xml
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/price"
+		style="@style/ContentText"
+		/>
+	```
 
 You probably will need to do the same for buttons, but don't stop there yet. Go beyond and move a group of related and repeated `android:****` attributes to a common style.
 
@@ -562,17 +563,17 @@ You probably will need to do the same for buttons, but don't stop there yet. Go 
 
 *不要做这些*
 
-```xml
-<resources>
-    <color name="button_foreground">#FFFFFF</color>
-    <color name="button_background">#2A91BD</color>
-    <color name="comment_background_inactive">#5F5F5F</color>
-    <color name="comment_background_active">#939393</color>
-    <color name="comment_foreground">#FFFFFF</color>
-    <color name="comment_foreground_important">#FF9D2F</color>
-    ...
-    <color name="comment_shadow">#323232</color>
-```
+	```xml
+	<resources>
+		<color name="button_foreground">#FFFFFF</color>
+		<color name="button_background">#2A91BD</color>
+		<color name="comment_background_inactive">#5F5F5F</color>
+		<color name="comment_background_active">#939393</color>
+		<color name="comment_foreground">#FFFFFF</color>
+		<color name="comment_foreground_important">#FF9D2F</color>
+		...
+		<color name="comment_shadow">#323232</color>
+	```
 
 You can easily start repeating RGBA values in this format, and that makes it complicated to change a basic color if needed. Also, those definitions are related to some context, like "button" or "comment", and should live in a button style, not in `colors.xml`.
 
@@ -583,24 +584,24 @@ Instead, do this:
 
 相反，这样做:
 
-```xml
-<resources>
+	```xml
+	<resources>
 
-    <!-- grayscale -->
-    <color name="white"     >#FFFFFF</color>
-    <color name="gray_light">#DBDBDB</color>
-    <color name="gray"      >#939393</color>
-    <color name="gray_dark" >#5F5F5F</color>
-    <color name="black"     >#323232</color>
+		<!-- grayscale -->
+		<color name="white"     >#FFFFFF</color>
+		<color name="gray_light">#DBDBDB</color>
+		<color name="gray"      >#939393</color>
+		<color name="gray_dark" >#5F5F5F</color>
+		<color name="black"     >#323232</color>
 
-    <!-- basic colors -->
-    <color name="green">#27D34D</color>
-    <color name="blue">#2A91BD</color>
-    <color name="orange">#FF9D2F</color>
-    <color name="red">#FF432F</color>
+		<!-- basic colors -->
+		<color name="green">#27D34D</color>
+		<color name="blue">#2A91BD</color>
+		<color name="orange">#FF9D2F</color>
+		<color name="red">#FF432F</color>
 
-</resources>
-```
+	</resources>
+	```
 
 
 ---------------------------------------------------------------
@@ -623,29 +624,29 @@ Normally for a aesthetic UI, it is important to reduce the variety of colors bei
 **像对待colors.xml一样对待dimens.xml文件** 与定义颜色调色板一样，你同时也应该定义一个空隙间隔和字体大小的“调色板”。
 如下所示：
 
-```xml
-<resources>
+	```xml
+	<resources>
 
-    <!-- font sizes -->
-    <dimen name="font_larger">22sp</dimen>
-    <dimen name="font_large">18sp</dimen>
-    <dimen name="font_normal">15sp</dimen>
-    <dimen name="font_small">12sp</dimen>
+		<!-- font sizes -->
+		<dimen name="font_larger">22sp</dimen>
+		<dimen name="font_large">18sp</dimen>
+		<dimen name="font_normal">15sp</dimen>
+		<dimen name="font_small">12sp</dimen>
 
-    <!-- typical spacing between two views -->
-    <dimen name="spacing_huge">40dp</dimen>
-    <dimen name="spacing_large">24dp</dimen>
-    <dimen name="spacing_normal">14dp</dimen>
-    <dimen name="spacing_small">10dp</dimen>
-    <dimen name="spacing_tiny">4dp</dimen>
+		<!-- typical spacing between two views -->
+		<dimen name="spacing_huge">40dp</dimen>
+		<dimen name="spacing_large">24dp</dimen>
+		<dimen name="spacing_normal">14dp</dimen>
+		<dimen name="spacing_small">10dp</dimen>
+		<dimen name="spacing_tiny">4dp</dimen>
 
-    <!-- typical sizes of views -->
-    <dimen name="button_height_tall">60dp</dimen>
-    <dimen name="button_height_normal">40dp</dimen>
-    <dimen name="button_height_short">32dp</dimen>
+		<!-- typical sizes of views -->
+		<dimen name="button_height_tall">60dp</dimen>
+		<dimen name="button_height_normal">40dp</dimen>
+		<dimen name="button_height_short">32dp</dimen>
 
-</resources>
-```
+	</resources>
+	```
 -------------------------------------------------------------------
 You should use the `spacing_****` dimensions for layouting, in margins and paddings, instead of hard-coded values, much like strings are normally treated. This will give a consistent look-and-feel, while making it easier to organize and change styles and layouts.
 
@@ -658,38 +659,38 @@ You should use the `spacing_****` dimensions for layouting, in margins and paddi
 **避免深层次的视图结构** 有时候为了摆放一个视图，你可能尝试添加另一个LinearLayout。你可能使用这种方法解决：
 --------------------------------------------------------------------
 
-```xml
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+	```xml
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		>
 
-    <RelativeLayout
-        ...
-        >
+		<RelativeLayout
+			...
+			>
 
-        <LinearLayout
-            ...
-            >
+			<LinearLayout
+				...
+				>
 
-            <LinearLayout
-                ...
-                >
+				<LinearLayout
+					...
+					>
 
-                <LinearLayout
-                    ...
-                    >
-                </LinearLayout>
+					<LinearLayout
+						...
+						>
+					</LinearLayout>
 
-            </LinearLayout>
+				</LinearLayout>
 
-        </LinearLayout>
+			</LinearLayout>
 
-    </RelativeLayout>
+		</RelativeLayout>
 
-</LinearLayout>
-```
+	</LinearLayout>
+	```
 
 Even if you don't witness this explicitly in a layout file, it might end up happening if you are inflating (in Java) views into other views.
 
@@ -751,13 +752,13 @@ However, testing under Robolectric is inaccurate and incomplete regarding UI tes
 
 
 
-```java
-solo.sendKey(Solo.MENU);
-solo.clickOnText("More"); // searches for the first occurence of "More" and clicks on it
-solo.clickOnText("Preferences");
-solo.clickOnText("Edit File Extensions");
-Assert.assertTrue(solo.searchText("rtf"));
-```
+	```java
+	solo.sendKey(Solo.MENU);
+	solo.clickOnText("More"); // searches for the first occurence of "More" and clicks on it
+	solo.clickOnText("Preferences");
+	solo.clickOnText("Edit File Extensions");
+	Assert.assertTrue(solo.searchText("rtf"));
+	```
 
 
 ### Emulators
@@ -791,18 +792,18 @@ Whether you are using ProGuard or not depends on your project configuration. Usu
 
 你是否使用ProGuard取决你项目的配置，当你构建一个release版本的apk时，通常你应该配置gradle文件。
 
-```groovy
-buildTypes {
-    debug {
-        minifyEnabled false
-    }
-    release {
-        signingConfig signingConfigs.release
-        minifyEnabled true
-        proguardFiles 'proguard-rules.pro'
-    }
-}
-```
+	```groovy
+	buildTypes {
+		debug {
+			minifyEnabled false
+		}
+		release {
+			signingConfig signingConfigs.release
+			minifyEnabled true
+			proguardFiles 'proguard-rules.pro'
+		}
+	}
+	```
 
 In order to determine which code has to be preserved and which code can be discarded or obfuscated, you have to specify one or more entry points to your code. These entry points are typically classes with main methods, applets, midlets, activities, etc.
 Android framework uses a default configuration which can be found from `SDK_HOME/tools/proguard/proguard-android.txt`. Custom project-specific proguard rules, as defined in `my-project/app/proguard-rules.pro`, will be appended to the default configuration.
