@@ -662,6 +662,8 @@ You should use the `spacing_****` dimensions for layouting, in margins and paddi
 
 
 **避免深层次的视图结构** 有时候为了摆放一个视图，你可能尝试添加另一个LinearLayout。你可能使用这种方法解决：
+
+
 --------------------------------------------------------------------
 
 	```xml
@@ -731,6 +733,7 @@ Avoid using a WebView for simple texts or buttons, prefer TextViews or Buttons.
 
 
 ### Test frameworks
+
 ### 测试框架
 
 Android SDK's testing framework is still infant, specially regarding UI tests. Android Gradle currently implements a test task called [`connectedAndroidTest`](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing) which runs JUnit tests that you created, using an [extension of JUnit with helpers for Android](http://developer.android.com/reference/android/test/package-summary.html). This means you will need to run tests connected to a device, or an emulator. Follow the official guide [[1]](http://developer.android.com/tools/testing/testing_android.html) [[2]](http://developer.android.com/tools/testing/activity_test.html) for testing.
@@ -767,6 +770,7 @@ However, testing under Robolectric is inaccurate and incomplete regarding UI tes
 
 
 ### Emulators
+
 ### 模拟器
 
 If you are developing Android apps as a profession, buy a license for the [Genymotion emulator](http://www.genymotion.com/).
@@ -787,6 +791,7 @@ You might also need to test Samsung-specific APIs, so it's necessary to have a r
 
 
 ### Proguard configuration
+
 ### 混淆配置
 
 [ProGuard](http://proguard.sourceforge.net/) is normally used on Android projects to shrink and obfuscate the packaged code.
@@ -881,6 +886,7 @@ It can also easily split Dex files to solve the 65k methods limitation.
 它会很容易将Dex文件分割，来解决65K个方法限制问题。
 
 ### Thanks to
+
 ### 致谢
 
 Antti Lammi, Joni Karppinen, Peter Tackage, Timo Tuominen, Vera Izrailit, Vihtori Mäntylä, Mark Voit, Andre Medeiros, Paul Houghton and other Futurice developers for sharing their knowledge on Android development.
