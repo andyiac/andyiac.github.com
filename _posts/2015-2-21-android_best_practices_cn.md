@@ -7,6 +7,8 @@ tags : [翻译,android]
 
  **翻译初稿，近期还会修改敬请期待** 有问题请微信联系：andyiac
  
+ 
+ 
 
 从[Futurice](http://www.futurice.com)公司Android开发者中学到的经验。
 遵循以下准则，避免重复发明轮子。若您对开发iOS或Windows Phone 有兴趣，
