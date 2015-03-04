@@ -1,8 +1,8 @@
 ---
 layout: post
-category: 翻译
-tags : [翻译,android]
-title : android 开发最佳实践
+category: translate
+tags : [translate,android]
+title : Android 开发最佳实践
 ---
 
 ## 缘由
