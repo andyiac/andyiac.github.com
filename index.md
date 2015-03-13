@@ -2,7 +2,7 @@
 layout: page
 title: andyiac的博客
 tagline: 
-description: "Thoughts, stories and ideas."
+tagline: "Thoughts, stories and ideas."
 ---
 {% include JB/setup %}
 
