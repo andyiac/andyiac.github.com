@@ -1,6 +1,6 @@
 ---
 layout: page
-title: andyiac的博客
+title: Thoughts, stories and ideas.
 tagline: 
 ---
 {% include JB/setup %}
