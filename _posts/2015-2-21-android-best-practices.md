@@ -68,7 +68,7 @@ Ant 有很多限制，也很冗余。使用Gradle，完成以下工作很方便�
 
 老的结构:
 
-	```
+	
 	old-structure
 	├─ assets
 	├─ libs
@@ -79,11 +79,11 @@ Ant 有很多限制，也很冗余。使用Gradle，完成以下工作很方便�
 	├─ build.gradle
 	├─ project.properties
 	└─ proguard-rules.pro
-	```
+	
 
 新的结构
 
-	```
+	
 	new-structure
 	├─ library-foobar
 	├─ app
@@ -101,7 +101,7 @@ Ant 有很多限制，也很冗余。使用Gradle，完成以下工作很方便�
 	│  └─ proguard-rules.pro
 	├─ build.gradle
 	└─ settings.gradle
-	```
+	
 
 主要的区别在于，新的结构明确的分开了'source sets' (`main`,`androidTest`)，Gradle的一个理念。
 你可以做到，例如，添加源组‘paid’和‘free’在src中，这将成为您的应用程序的付费和免费的两种模式的源代码。
@@ -123,7 +123,6 @@ Ant 有很多限制，也很冗余。使用Gradle，完成以下工作很方便�
 
 _不要做这个_ . 这会出现在版本控制中。
 
-	```groovy
 	signingConfigs {
 		release {
 			storeFile file("myapp.keystore")
@@ -132,19 +131,18 @@ _不要做这个_ . 这会出现在版本控制中。
 			keyPassword "password789"
 		}
 	}
-	```
+	
 	
 而是，建立一个不加入版本控制系统的`gradle.properties`文件。
 
-```
-KEYSTORE_PASSWORD=password123
-KEY_PASSWORD=password789
-```
+
+	KEYSTORE_PASSWORD=password123
+	KEY_PASSWORD=password789
 
 
 那个文件是gradle自动引入的，你可以在`buld.gradle`文件中使用，例如：
 
-	```groovy
+	
 	signingConfigs {
 		release {
 			try {
@@ -158,7 +156,7 @@ KEY_PASSWORD=password789
 			}
 		}
 	}
-	```
+	
 	
 
 **使用 Maven 依赖方案代替使用导入jar包方案** 如果在你的项目中你明确使用率
@@ -166,7 +164,6 @@ jar文件，那么它们可能成为永久的版本，如`2.1.1`.下载jar包更
 这个问题Maven很好的解决了，这在Android Gradle构建中也是推荐的方法。你可
 以指定版本的一个范围，如`2.1.+`,然后Maven会自动升级到制定的最新版本，例如：
 
-	```groovy
 	dependencies {
 		compile 'com.netflix.rxjava:rxjava-core:0.19.+'
 		compile 'com.netflix.rxjava:rxjava-android:0.19.+'
@@ -176,7 +173,7 @@ jar文件，那么它们可能成为永久的版本，如`2.1.1`.下载jar包更
 		compile 'com.squareup.okhttp:okhttp:2.0.+'
 		compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.+'
 	}
-	```
+	
 
 ### IDEs and text editors
 
@@ -233,15 +230,14 @@ Timo Tuominen, Olli Salonen, Andre Medeiros, Mark Voit, Antti Lammi, Vera Izrail
 使用它时先安装JDK8，在Android Studio工程结构对话框中把它设置成为SDK路径，同时设置`JAVA8_HOME`和`JAVA7_HOME`环境变量，
 然后在工程根目录下配置 build.gradle：
 
-	```groovy
+	
 	dependencies {
 		classpath 'me.tatarka:gradle-retrolambda:2.4.+'
 	}
-	```
+	
 
 同时在每个module 的build.gradle中添加
 
-	```groovy
 	apply plugin: 'retrolambda'
 
 	android {
@@ -255,8 +251,7 @@ Timo Tuominen, Olli Salonen, Andre Medeiros, Mark Voit, Antti Lammi, Vera Izrail
 		oldJdk System.getenv("JAVA7_HOME")
 		javaVersion JavaVersion.VERSION_1_7
 	}
-	```
-
+	
 Android Studio 提供Java8 lambdas表带是代码提示支持。如果你对lambdas不熟悉，只需参照以下开始学习吧：
 
 - 任何只包含一个接口的方法都是"lambda friendly"同时代码可以被折叠成更紧凑的语法
@@ -321,7 +316,7 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 
 总而言之，以最接近用户而不是最接近后端去安排他们。
 
-	```
+	
 	com.futurice.project
 	├─ network
 	├─ models
@@ -333,8 +328,7 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 	   ├─ actionbar
 	   ├─ widgets
 	   └─ notifications
-	```
-
+	 
 
 ### 资源文件 Resources
 
@@ -353,7 +347,6 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 
 > 
 	
-	```xml
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
@@ -375,8 +368,7 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 		<include layout="@layout/reusable_part" />
 	
 	</LinearLayout>
-	```
-
+	
 作为一个经验法则,`android:layout_****`属性应该在 layout XML 中定义,同时其它属性`android:****` 应放在 styler XML中。此规则也有例外，不过大体工作
 的很好。这个思想整体是保持layout属性(positioning, margin, sizing) 和content属性在布局文件中，同时将所有的外观细节属性（colors, padding, font）放
 在style文件中。
@@ -392,24 +384,20 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 **使用styles** 几乎每个项目都需要适当的使用style文件，因为对于一个视图来说有一个重复的外观是很常见的。
 在应用中对于大多数文本内容，最起码你应该有一个通用的style文件，例如：
 
-	```xml
 	<style name="ContentText">
 		<item name="android:textSize">@dimen/font_normal</item>
 		<item name="android:textColor">@color/basic_black</item>
 	</style>
-	```
-
+	
 应用到TextView 中:
 
-	```xml
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="@string/price"
 		style="@style/ContentText"
 		/>
-	```
-
+	
 
 你或许需要为按钮控件做同样的事情，不要停止在那里。将一组相关的和重复`android:****`的属性放到一个通用的style中。
 
@@ -424,7 +412,6 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 
 *不要这样做*
 
-	```xml
 	<resources>
 		<color name="button_foreground">#FFFFFF</color>
 		<color name="button_background">#2A91BD</color>
@@ -434,8 +421,7 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 		<color name="comment_foreground_important">#FF9D2F</color>
 		...
 		<color name="comment_shadow">#323232</color>
-	```
-
+	 
 
 使用这种格式，你会非常容易的开始重复定义RGBA值，这使如果需要改变基本色变的很复杂。同时，这些定义是跟一些环境关联起来的，如`button`或者`comment`,
 应该放到一个按钮风格中，而不是在`color.xml`文件中。
@@ -443,7 +429,6 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 
 相反，这样做:
 
-	```xml
 	<resources>
 
 		<!-- grayscale -->
@@ -460,8 +445,7 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 		<color name="red">#FF432F</color>
 
 	</resources>
-	```
-
+	 
 
 向应用设计者那里要这个调色板，名称不需要跟"green", "blue", 等等相同。
 "brand_primary", "brand_secondary", "brand_negative" 这样的名字也是完全可以接受的。
@@ -472,7 +456,6 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 **像对待colors.xml一样对待dimens.xml文件** 与定义颜色调色板一样，你同时也应该定义一个空隙间隔和字体大小的“调色板”。
 一个好的例子，如下所示：
 
-	```xml
 	<resources>
 
 		<!-- font sizes -->
@@ -494,14 +477,12 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 		<dimen name="button_height_short">32dp</dimen>
 
 	</resources>
-	```
 	
 布局时在写 margins 和 paddings 时，你应该使用`spacing_****`尺寸格式来布局，而不是像对待String字符串一样直接写值。
 这样写会非常有感觉，会使组织和改变风格或布局是非常容易。
 
 **避免深层次的视图结构** 有时候为了摆放一个视图，你可能尝试添加另一个LinearLayout。你可能使用这种方法解决：
 
-	```xml
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -532,8 +513,7 @@ Android 应用程序在架构上大致是Java中的[Model-View-Controller](http:
 		</RelativeLayout>
 
 	</LinearLayout>
-	```
-
+	
 
 即使你没有非常明确的在一个layout布局文件中这样使用，如果你在Java文件中从一个view inflate（这个inflate翻译不过去，大家理解就行） 到其他views当中，也是可能会发生的。
 
@@ -575,14 +555,12 @@ Android SDK的测试框架还处于初级阶段，特别是关于UI测试方面�
 但它可能会对你有益，是因为它有许多来帮助类的获得和分析视图，控制屏幕。
 测试用例看起来像这样简单：
 
-	```java
 	solo.sendKey(Solo.MENU);
 	solo.clickOnText("More"); // searches for the first occurence of "More" and clicks on it
 	solo.clickOnText("Preferences");
 	solo.clickOnText("Edit File Extensions");
 	Assert.assertTrue(solo.searchText("rtf"));
-	```
-
+	
 
 ### 模拟器
 
@@ -600,7 +578,6 @@ Genymotion 模拟器运行更快的秒帧的速度，比起典型的AVD模拟器
 
 你是否使用ProGuard取决你项目的配置，当你构建一个release版本的apk时，通常你应该配置gradle文件。
 
-	```groovy
 	buildTypes {
 		debug {
 			minifyEnabled false
@@ -611,8 +588,7 @@ Genymotion 模拟器运行更快的秒帧的速度，比起典型的AVD模拟器
 			proguardFiles 'proguard-rules.pro'
 		}
 	}
-	```
-
+	
 为了决定哪些代码应该被保留，哪些代码应该被混淆，你不得不指定一个或多个实体类在你的代码中。
 这些实体应该是指定的类包含main方法，applets，midlets，activities，等等。
 Android framework 使用一个默认的配置文件，可以在`SDK_HOME/tools/proguard/proguard-android.txt`
@@ -633,14 +609,14 @@ Android framework 使用一个默认的配置文件，可以在`SDK_HOME/tools/p
 
 In order to prevent ProGuard from *stripping away* needed classes or class members, add a `keep` options to your proguard config:
 以防 ProGuard *剥离* 需要的类和类成员，添加一个 `keep`选项在你的 proguard 配置文件中：
-```
--keep class com.futurice.project.MyClass { *; }
-```
+ 
+	-keep class com.futurice.project.MyClass { *; }
+ 
 
 防止 ProGuard *混淆* 一些类和成员，添加 `keepnames`:
-```
--keepnames class com.futurice.project.MyClass { *; }
-```
+	
+	-keepnames class com.futurice.project.MyClass { *; }
+ 
 
 查看[this template's ProGuard config](https://github.com/futurice/android-best-practices/blob/master/templates/rx-architecture/app/proguard-rules.pro) 中的一些例子。
 更多例子请参考[Proguard](http://proguard.sourceforge.net/#manual/examples.html)。
