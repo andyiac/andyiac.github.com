@@ -1,7 +1,7 @@
 ---
 layout: post
-category: ideology
-tags : [ideology]
+category: android
+tags : [android]
 title : Android 干货推荐
 ---
 {% include JB/setup %}
