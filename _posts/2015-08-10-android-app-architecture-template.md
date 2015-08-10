@@ -4,6 +4,6 @@ category: android
 tags: [android]
 title: Android app architecture template
 ---
-{% incloude JB/setup %}
+{% include JB/setup %}
 
 Android 应用开发架构范例
