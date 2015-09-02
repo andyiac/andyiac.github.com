@@ -1,6 +1,6 @@
 ---
 layout: post
-category: ideology
+category: backend 
 tags : [python]
 title : python 开源项目 requests 抓取中文网页乱码
 ---
