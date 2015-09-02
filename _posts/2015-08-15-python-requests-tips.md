@@ -7,7 +7,7 @@ title : python 开源项目 requests 抓取中文网页乱码
 {% include JB/setup %}
 
 
-最近再写一个Android客户端，没有数据就拿python抓了一个网站[githubrank.com](http://githubrank.com)来测试，
+最近在写一个Android客户端，没有数据就拿python抓了一个网站[githubrank.com](http://githubrank.com)来测试，
 用到了开源项目[requests](https://github.com/kennethreitz/requests) 
 
 抓取数据代码如下：
@@ -15,8 +15,11 @@ title : python 开源项目 requests 抓取中文网页乱码
 
 ```
 	import requests
+
 	# crawler ranking
+
 	r = requests.get("http://githubrank.com")
+
 	print r.text
 ```
 
@@ -32,13 +35,16 @@ title : python 开源项目 requests 抓取中文网页乱码
 
 ```
 	 print '\xe4\xba\x91\xe9\xa3\x8e'.decode('utf-8')
+
 	 风云
 ```
 
 查看响应编码发现：
 
+
 ```
 	r.encoding
+
 	'ISO-8859-1'
 ```
 
@@ -48,14 +54,12 @@ google了一番发现requests只会简单的从服务器响应头的Context-Type
 
 解决办法即使用ISO-8895-1 encode一下，在使用正确的charset去descode,不过可能再转换过程中引起数据丢失。
 
+
 ```
 	print r.text.encode('ISO-8859-1').decode('utf-8')
 ```
 
 正常显示
 
-
-
 [refer](http://www.zhetenga.com/view/python的requests类抓取中文页面出现乱码-0abbaa140.html)
 
-![](http://ww2.sinaimg.cn/bmiddle/6b6e567cgw1eo9zdjfy1lj20c80gagmk.jpg)
