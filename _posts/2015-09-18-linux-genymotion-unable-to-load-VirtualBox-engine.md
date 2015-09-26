@@ -2,7 +2,7 @@
 layout: post
 category: android 
 tags : [android]
-title : genymotion on ubuntu unable to load VirtualBox engine error 
+title : genymotion unable to load VirtualBox engine error 
 ---
 {% include JB/setup %}
 
