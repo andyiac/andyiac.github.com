@@ -13,7 +13,7 @@ title : genymotion on ubuntu unable to load VirtualBox engine error
 
 Google 一番发现如下命令可顺利解决问题：
 
-	➜  ~   virtualbox restart
+	➜  ~ virtualbox restart
 	WARNING: The vboxdrv kernel module is not loaded. Either there is no module
 	available for the current kernel (3.16.0-49-generic) or it failed to
 	load. Please recompile the kernel module and install it by
@@ -24,7 +24,7 @@ Google 一番发现如下命令可顺利解决问题：
 
 根据提示重新编译 kernel 模块 
 
-	➜  ~   sudo /etc/init.d/vboxdrv setup
+	➜  ~ sudo /etc/init.d/vboxdrv setup
 	Stopping VirtualBox kernel modules ...done.
 	Recompiling VirtualBox kernel modules ...done.
 	Starting VirtualBox kernel modules ...done.
