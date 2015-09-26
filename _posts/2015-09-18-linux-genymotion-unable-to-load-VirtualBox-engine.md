@@ -29,4 +29,4 @@ Google 一番发现如下命令可顺利解决问题：
 	Recompiling VirtualBox kernel modules ...done.
 	Starting VirtualBox kernel modules ...done.
 
-打完手工
+打完收工
