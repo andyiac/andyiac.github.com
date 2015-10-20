@@ -22,6 +22,8 @@ Android开发者，爱生活，爱技术， 爱开源，爱赚钱。
 
 * 微信：andyiac
 
+* Email: andyiaczhang#gmail.com
+
 ## 订阅本站
 
 * [http://blog.andyiac.com/atom](http://blog.andyiac.com/atom)

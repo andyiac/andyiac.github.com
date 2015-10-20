@@ -10,9 +10,12 @@ tagline: "Thoughts, stories and ideas."
 
 * [Android 开发最佳实践](http://blog.andyiac.com/translate/2015/02/21/android-best-practices/)
 
+## 开源项目
+
+* [GitHot](https://github.com/andyiac/githot)
+
 ## 计划2015
 
 
 * [书单 2015](http://blog.andyiac.com/ideology/2015/02/11/book-list-2015/)
-
 
