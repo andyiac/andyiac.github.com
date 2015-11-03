@@ -6,6 +6,11 @@ title : 干货推荐
 ---
 {% include JB/setup %}
 
+### Awesome android
+- [http://snowdream.github.io/awesome-android/](http://snowdream.github.io/awesome-android/)
+
+### Awesome list 
+- [https://github.com/sindresorhus/awesome](https://github.com/sindresorhus/awesome)
 
 ### RxJava
 - [给 Android 开发者的 RxJava 详解](http://gank.io/post/560e15be2dca930e00da1083) Flipboard 小伙伴 扔物线力作
