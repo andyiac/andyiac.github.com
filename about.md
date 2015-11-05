@@ -30,7 +30,7 @@ Android开发者，爱生活，爱技术， 爱开源，爱赚钱。
 
 ## 关于本站
 
-* &copy andyiac 2012 with help from [jekyllbootstrap](http://jekyllbootstrap.com) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/)
+* © andyiac 2012 with help from [jekyllbootstrap](http://jekyllbootstrap.com) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/)
 
 
 
